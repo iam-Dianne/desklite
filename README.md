@@ -1,4 +1,4 @@
-# DeskLite
+# DeskLite [in progress]
 
 **AI-powered IT ticket triage for teams too small to have an IT department.**
 
@@ -44,13 +44,13 @@ Deliberately left out of v1: authentication, multi-user roles, real-time updates
 
 ## Tech Stack
 
-| Layer | Choice |
-|---|---|
-| Frontend + API routes | Next.js |
-| Styling | Tailwind CSS |
-| Database | Supabase (Postgres) |
-| AI triage | LLM API call (Anthropic or OpenAI) |
-| Hosting | Vercel |
+| Layer                 | Choice                             |
+| --------------------- | ---------------------------------- |
+| Frontend + API routes | Next.js                            |
+| Styling               | Tailwind CSS                       |
+| Database              | Supabase (Postgres)                |
+| AI triage             | LLM API call (Anthropic or OpenAI) |
+| Hosting               | Vercel                             |
 
 ## Data Model (v1)
 
@@ -89,4 +89,4 @@ tickets
 
 ---
 
-*Built by Dianne Angelika Ramirez as a personal project bridging web development, IT support fundamentals, and applied AI.*
+_Built by Dianne Angelika Ramirez as a personal project bridging web development, IT support fundamentals, and applied AI._
