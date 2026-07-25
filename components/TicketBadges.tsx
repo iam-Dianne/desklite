@@ -12,7 +12,7 @@ const categoryStyles: Record<string, string> = {
   network: "bg-primary/10 text-primary border-primary/30",
   software: "bg-blue-600/10 text-blue-600 border-blue-600/30",
   security: "bg-purple-600/10 text-purple-600 border-purple-600/30",
-  other: "bg-muted text-muted-foreground border-muted-foreground/20",
+  other: "bg-background text-muted-foreground border-muted-foreground/20",
 };
 
 type TicketBadgesProps = {

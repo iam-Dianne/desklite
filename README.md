@@ -44,13 +44,13 @@ Deliberately left out of v1: authentication, multi-user roles, real-time updates
 
 ## Tech Stack
 
-| Layer                 | Choice                             |
-| --------------------- | ---------------------------------- |
-| Frontend + API routes | Next.js                            |
-| Styling               | Tailwind CSS                       |
-| Database              | Supabase (Postgres)                |
-| AI triage             | LLM API call (Anthropic or OpenAI) |
-| Hosting               | Vercel                             |
+| Layer                 | Choice                   |
+| --------------------- | ------------------------ |
+| Frontend + API routes | Next.js                  |
+| Styling               | Tailwind CSS, Shadcn     |
+| Database              | Supabase (Postgres)      |
+| AI triage             | LLM API call (Anthropic) |
+| Hosting               | Vercel                   |
 
 ## Data Model (v1)
 
