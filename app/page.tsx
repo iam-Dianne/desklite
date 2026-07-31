@@ -23,6 +23,8 @@ const Homepage = () => {
     "idle" | "submitting" | "success" | "error"
   >("idle");
   const [result, setResult] = useState<TriageResult | null>(null);
+  const [id, setId] = useState<number>(0);
+  const [ticketStatus, setTicketStatus] = useState("");
 
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
@@ -46,6 +48,9 @@ const Homepage = () => {
       });
       return;
     }
+
+    setId(ticket.id);
+    setTicketStatus(ticket.status);
 
     const res = await fetch("/api/triage", {
       method: "POST",
@@ -74,7 +79,7 @@ const Homepage = () => {
       })
       .eq("id", ticket.id);
 
-    console.log("update result:", updateData, updateError);
+    console.log("update result:", updateData, updateError, id);
 
     if (updateError) {
       console.error(updateError);
@@ -113,6 +118,8 @@ const Homepage = () => {
             viewport={{ amount: 0.3 }}
           >
             <ResultCard
+              id={id}
+              status={ticketStatus}
               category={result.ticket_category}
               priority={result.ticket_priority}
               suggestedStep={result.suggested_steps}

@@ -3,17 +3,52 @@ import { Button } from "./ui/button";
 import TicketBadges from "./TicketBadges";
 import { RESOLVED_MESSAGE, ESCALATED_MESSAGE } from "@/lib/ticketMessages";
 import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 type resultItems = {
+  id: number;
   category: string;
   priority: string;
+  status: string;
   suggestedStep: string[];
 };
 
-const ResultCard = ({ category, priority, suggestedStep }: resultItems) => {
+const ResultCard = ({
+  id,
+  category,
+  priority,
+  status,
+  suggestedStep,
+}: resultItems) => {
   const [feedback, setFeedback] = useState<"resolved" | "escalated" | null>(
     null,
   );
+
+  const handleEscalated = async () => {
+    const { data: updateData, error: updateError } = await supabase
+      .from("tickets")
+      .update({ status: "escalated" })
+      .eq("id", id);
+
+    setFeedback("escalated");
+
+    if (updateError) {
+      console.error(updateError);
+    }
+  };
+
+  const handleResolved = async () => {
+    const { data: updateData, error: updateError } = await supabase
+      .from("tickets")
+      .update({ status: "resolved" })
+      .eq("id", id);
+
+    setFeedback("resolved");
+
+    if (updateError) {
+      console.error(updateError);
+    }
+  };
 
   return (
     <Card size="sm" className="text-sm">
@@ -35,7 +70,11 @@ const ResultCard = ({ category, priority, suggestedStep }: resultItems) => {
       ) : (
         <>
           <CardHeader className="flex flex-col gap-2">
-            <TicketBadges category={category} priority={priority} />
+            <TicketBadges
+              status={status}
+              category={category}
+              priority={priority}
+            />
             <CardDescription>Suggested first steps</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-6">
@@ -46,15 +85,11 @@ const ResultCard = ({ category, priority, suggestedStep }: resultItems) => {
             </ul>
 
             <div className="flex gap-3">
-              <Button
-                onClick={() => setFeedback("resolved")}
-                className={"flex-1"}
-                size="sm"
-              >
+              <Button onClick={handleResolved} className={"flex-1"} size="sm">
                 That fixed it
               </Button>
               <Button
-                onClick={() => setFeedback("escalated")}
+                onClick={handleEscalated}
                 className={"flex-1"}
                 size="sm"
                 variant={"outline"}

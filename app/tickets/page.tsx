@@ -50,10 +50,14 @@ const Tickets = () => {
               <TicketRows
                 category={ticket.category}
                 priority={ticket.priority}
+                status={ticket.status}
                 description={ticket.description}
-                timestamp={formatDistanceToNow(new Date(ticket.created_at), {
-                  addSuffix: true,
-                })}
+                timestamp={formatDistanceToNow(
+                  new Date(
+                    ticket.created_at +
+                      (ticket.created_at.endsWith("Z") ? "" : "Z"),
+                  ),
+                )}
               />
             </div>
           ))}

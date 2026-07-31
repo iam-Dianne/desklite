@@ -5,6 +5,7 @@ import TicketBadges from "./TicketBadges";
 type ticketRowItems = {
   category: string;
   priority: string;
+  status: string;
   description: string;
   timestamp: string;
 };
@@ -12,6 +13,7 @@ type ticketRowItems = {
 const TicketRows = ({
   category,
   priority,
+  status,
   description,
   timestamp,
 }: ticketRowItems) => {
@@ -19,9 +21,9 @@ const TicketRows = ({
     <div className="px-4 py-3 text-sm flex justify-between items-center border rounded-lg shadow-xs">
       <div className="flex flex-col gap-2">
         <div>{description}</div>
-        <TicketBadges category={category} priority={priority} />
+        <TicketBadges category={category} priority={priority} status={status} />
       </div>
-      <div className="text-muted">{timestamp}</div>
+      <div className="text-muted">{timestamp} ago</div>
     </div>
   );
 };

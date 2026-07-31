@@ -15,12 +15,19 @@ const categoryStyles: Record<string, string> = {
   other: "bg-background text-muted-foreground border-muted-foreground/20",
 };
 
+const statusStyles: Record<string, string> = {
+  resolved: "bg-primary/10 text-primary border-primary/30",
+  escalated: "bg-red-600/10 text-red-600 border-red-600/30",
+  open: "bg-background text-muted-foreground border-muted-foreground/20",
+};
+
 type TicketBadgesProps = {
   category: string;
   priority: string;
+  status: string;
 };
 
-const TicketBadges = ({ category, priority }: TicketBadgesProps) => {
+const TicketBadges = ({ category, priority, status }: TicketBadgesProps) => {
   return (
     <div className="flex gap-2">
       <Badge className={categoryStyles[category] ?? categoryStyles.other}>
@@ -28,6 +35,9 @@ const TicketBadges = ({ category, priority }: TicketBadgesProps) => {
       </Badge>
       <Badge className={priorityStyles[priority] ?? priorityStyles.other}>
         {priority}
+      </Badge>
+      <Badge className={statusStyles[status] ?? statusStyles.other}>
+        {status}
       </Badge>
     </div>
   );
