@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import TicketBadges from "./TicketBadges";
 
 type ticketRowItems = {
+  id: string;
   category: string;
   priority: string;
   status: string;
@@ -11,6 +13,7 @@ type ticketRowItems = {
 };
 
 const TicketRows = ({
+  id,
   category,
   priority,
   status,
@@ -18,13 +21,16 @@ const TicketRows = ({
   timestamp,
 }: ticketRowItems) => {
   return (
-    <div className="px-4 py-3 text-sm flex justify-between items-center border rounded-lg shadow-xs">
+    <Link
+      href={`/tickets/${id}`}
+      className="px-4 py-3 text-sm flex justify-between items-center border rounded-lg shadow-xs hover:scale-101 hover:bg-foreground/3"
+    >
       <div className="flex flex-col gap-2">
         <div>{description}</div>
         <TicketBadges category={category} priority={priority} status={status} />
       </div>
       <div className="text-muted">{timestamp} ago</div>
-    </div>
+    </Link>
   );
 };
 

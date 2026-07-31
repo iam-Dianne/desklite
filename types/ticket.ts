@@ -14,7 +14,7 @@ export type TriageResult = {
 };
 
 export type TicketResult = {
-  id: number;
+  id: string;
   description: string;
   category: TicketCategory;
   priority: TicketPriority;
