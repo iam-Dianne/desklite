@@ -1,7 +1,7 @@
 import { Badge } from "./ui/badge";
 
 const priorityStyles: Record<string, string> = {
-  low: "bg-muted text-muted-foreground border-muted-foreground/20",
+  low: "bg-background text-muted-foreground border-muted-foreground/20",
   medium: "bg-secondary/10 text-accent-orange border-secondary/30",
   high: "bg-orange-600/10 text-orange-600 border-orange-600/30",
   critical: "bg-red-600/10 text-red-600 border-red-600/30",

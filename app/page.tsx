@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import ResultCard from "@/components/ResultCard";
 import { toast } from "@/components/ui/toast";
 import { motion } from "motion/react";
+import { TriageResult } from "@/types/ticket";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -14,12 +15,6 @@ const fadeUp = {
     y: 0,
     transition: { duration: 0.7, ease: "easeOut" as const },
   },
-};
-
-type TriageResult = {
-  ticket_category: string;
-  ticket_priority: string;
-  suggested_steps: string[];
 };
 
 const Homepage = () => {
@@ -110,7 +105,7 @@ const Homepage = () => {
           {status === "submitting" ? "Submitting..." : "Submit ticket"}
         </Button>
 
-        {status === "success" && (
+        {status === "success" && result && (
           <motion.div
             variants={fadeUp}
             initial="hidden"
