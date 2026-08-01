@@ -4,7 +4,7 @@ import NavItems from "./NavItems";
 
 const Navbar = () => {
   return (
-    <nav className="navbar fixed self-center">
+    <nav className="navbar fixed self-center bg-background/90">
       <Link href={"/"} className=" text-lg">
         DeskLite
       </Link>

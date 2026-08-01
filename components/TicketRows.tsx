@@ -23,13 +23,13 @@ const TicketRows = ({
   return (
     <Link
       href={`/tickets/${id}`}
-      className="px-4 py-3 text-sm flex justify-between items-center border rounded-lg shadow-xs hover:scale-101 hover:bg-foreground/3"
+      className="p-2 md:px-4 md:py-3 text-sm flex justify-between items-center gap-2 border rounded-lg shadow-xs hover:scale-101 hover:bg-foreground/3"
     >
-      <div className="flex flex-col gap-2">
-        <div>{description}</div>
+      <div className="w-3/4 flex flex-col gap-2">
+        <div className="text-xs md:text-sm">{description}</div>
         <TicketBadges category={category} priority={priority} status={status} />
       </div>
-      <div className="text-muted">{timestamp} ago</div>
+      <div className="w-1/4 text-end text-muted text-xs">{timestamp} ago</div>
     </Link>
   );
 };

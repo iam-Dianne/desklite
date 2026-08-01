@@ -29,7 +29,7 @@ type TicketBadgesProps = {
 
 const TicketBadges = ({ category, priority, status }: TicketBadgesProps) => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 text-xs md:text-sm">
       <Badge className={categoryStyles[category] ?? categoryStyles.other}>
         {category}
       </Badge>
