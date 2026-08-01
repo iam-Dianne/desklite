@@ -5,11 +5,13 @@ import { supabase } from "@/lib/supabase";
 import { TicketResult } from "@/types/ticket";
 import { formatDistanceToNow } from "date-fns";
 import TicketNavbar from "@/components/TicketNavbar";
+import { Spinner } from "@/components/ui/spinner";
 
 const Tickets = () => {
   const [tickets, setTickets] = useState<TicketResult[]>([]);
   const [error, setError] = useState("");
   const [escalatedCount, setEscalatedCount] = useState<number | null>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +40,7 @@ const Tickets = () => {
         .eq("status", "escalated");
 
       setEscalatedCount(count);
+      setLoading(false);
     };
 
     fetchData();
@@ -53,25 +56,31 @@ const Tickets = () => {
             {tickets.length} open, {escalatedCount} needs attention
           </p>
         </div>
-        <p className="text-sm text-red-400">{error}</p>
+        {error && <p className="text-sm text-red-400">{error}</p>}
         <div className="flex flex-col gap-3">
-          {tickets.map((ticket) => (
-            <div key={ticket.id}>
-              <TicketRows
-                id={ticket.id}
-                category={ticket.category}
-                priority={ticket.priority}
-                status={ticket.status}
-                description={ticket.description}
-                timestamp={formatDistanceToNow(
-                  new Date(
-                    ticket.created_at +
-                      (ticket.created_at.endsWith("Z") ? "" : "Z"),
-                  ),
-                )}
-              />
-            </div>
-          ))}
+          {loading && <Spinner />}
+          {!loading && tickets.length === 0 && (
+            <p className="text-center">All quiet — no tickets yet</p>
+          )}
+
+          {!loading &&
+            tickets.map((ticket) => (
+              <div key={ticket.id}>
+                <TicketRows
+                  id={ticket.id}
+                  category={ticket.category}
+                  priority={ticket.priority}
+                  status={ticket.status}
+                  description={ticket.description}
+                  timestamp={formatDistanceToNow(
+                    new Date(
+                      ticket.created_at +
+                        (ticket.created_at.endsWith("Z") ? "" : "Z"),
+                    ),
+                  )}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>

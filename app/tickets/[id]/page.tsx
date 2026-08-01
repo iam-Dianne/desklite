@@ -9,12 +9,13 @@ import { useParams } from "next/navigation";
 import TicketBadges from "@/components/TicketBadges";
 import { formatDistanceToNow } from "date-fns";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 
 const TicketPage = () => {
   const [ticket, setTicket] = useState<TicketResult | null>(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
   const params = useParams();
-  const [buttonUpdate, setButtonUpdate] = useState("unresolved");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +30,7 @@ const TicketPage = () => {
       }
 
       setTicket(data);
+      setLoading(false);
     };
 
     fetchData();
@@ -58,7 +60,11 @@ const TicketPage = () => {
       >
         <ArrowLeft size={16} /> back to tickets
       </Link>
-      {ticket && (
+      {loading && <Spinner />}
+      {!loading && !ticket && (
+        <p className="text-red-500 text-center">Ticket not found :(</p>
+      )}
+      {!loading && ticket && (
         <div className="flex flex-col gap-2">
           <TicketBadges
             category={ticket.category}
@@ -81,11 +87,17 @@ const TicketPage = () => {
           </div>
           <div className="p-3 mb-3 border border-muted/30 rounded-lg">
             <p className="text-muted">Suggested Steps</p>
-            {ticket.suggested_steps.map((step, index) => (
-              <p className="px-2" key={index}>
-                {">"} {step}
+            {ticket.suggested_steps && ticket.suggested_steps.length > 0 ? (
+              ticket.suggested_steps.map((step, index) => (
+                <p className="px-2" key={index}>
+                  {">"} {step}
+                </p>
+              ))
+            ) : (
+              <p className="px-2 text-muted text-sm">
+                No suggestions available yet.
               </p>
-            ))}
+            )}
           </div>
           <Button
             onClick={handleToggleStatus}
