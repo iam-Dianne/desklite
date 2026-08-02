@@ -52,7 +52,7 @@ const TicketPage = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 py-24 container">
+    <div className="min-h-screen flex flex-col gap-6 py-24 container">
       <TicketNavbar />
       <Link
         href={"/tickets"}
